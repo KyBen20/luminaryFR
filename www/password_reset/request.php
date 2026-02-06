@@ -18,7 +18,7 @@ if ($PASSWORD_RESET_ENABLED != TRUE) {
 
 // Check if email sending is enabled
 if ($EMAIL_SENDING_ENABLED != TRUE) {
-  die("Email sending is not configured. Password reset requires email functionality.");
+  die("L'envoi d'e-mails n'est pas configuré. La réinitialisation du mot de passe nécessite la messagerie électronique.");
 }
 
 $request_sent = FALSE;
@@ -116,13 +116,13 @@ if (isset($_POST['request_reset'])) {
             audit_log('password_reset_requested', $username, 'Email: ' . $user_mail . ', IP: ' . ($_SERVER['REMOTE_ADDR'] ?? 'unknown'), 'success');
           }
           else {
-            error_log("$log_prefix Password reset: Failed to send email to $user_mail");
+            error_log("$log_prefix Réinitialisation du mot de passe : Échec de l’envoi de l’e-mail à $user_mail");
             // Audit log email failure
             audit_log('password_reset_email_failed', $username, 'Email: ' . $user_mail, 'failure');
           }
         }
         else {
-          error_log("$log_prefix Password reset: Failed to generate token for $username");
+          error_log("$log_prefix Réinitialisation du mot de passe : échec de la génération du jeton pour $username");
           // Audit log token generation failure
           audit_log('password_reset_token_failed', $username, 'Failed to generate token', 'failure');
         }
@@ -151,23 +151,23 @@ render_header("Reset your $ORGANISATION_NAME password");
 
 if ($rate_limited) {  ?>
  <div class="alert alert-warning">
-  <p class="text-center"><strong>Too many requests</strong></p>
-  <p class="text-center">You have exceeded the maximum number of password reset requests. Please try again later.</p>
+  <p class="text-center"><strong>Trop de demandes</strong></p>
+  <p class="text-center">Vous avez dépassé le nombre maximal de demandes de réinitialisation de mot de passe. Veuillez réessayer plus tard.</p>
  </div>
 <?php }
 
 if (isset($invalid_username)) {  ?>
  <div class="alert alert-warning">
-  <p class="text-center">Please enter a valid username.</p>
+  <p class="text-center">Veuillez saisir un nom d'utilisateur valide.</p>
  </div>
 <?php }
 
 if ($request_sent) {  ?>
  <div class="alert alert-success">
-  <p class="text-center"><strong>Password reset email sent</strong></p>
-  <p class="text-center">If an account exists with that username, you will receive a password reset link shortly.</p>
-  <p class="text-center">Please check your email and follow the instructions.</p>
-  <p class="text-center"><small>The reset link will expire in <?php echo isset($PASSWORD_RESET_TOKEN_EXPIRY_MINUTES) ? $PASSWORD_RESET_TOKEN_EXPIRY_MINUTES : 60; ?> minutes.</small></p>
+  <p class="text-center"><strong>Courriel de réinitialisation du mot de passe envoyé</strong></p>
+  <p class="text-center">Si un compte existe avec ce nom d'utilisateur, vous recevrez prochainement un lien de réinitialisation de mot de passe.</p>
+  <p class="text-center">Veuillez consulter votre messagerie électronique et suivre les instructions.</p>
+  <p class="text-center"><small>Le lien de réinitialisation expirera dans <?php echo isset($PASSWORD_RESET_TOKEN_EXPIRY_MINUTES) ? $PASSWORD_RESET_TOKEN_EXPIRY_MINUTES : 60; ?> minutes.</small></p>
  </div>
 <?php } else { ?>
 
@@ -175,10 +175,10 @@ if ($request_sent) {  ?>
   <div class="col-md-8">
 
    <div class="card">
-    <div class="card-header text-center">Request password reset</div>
+    <div class="card-header text-center">Demande de réinitialisation du mot de passe</div>
 
     <ul class="list-group">
-     <li class="list-group-item">Enter your username below to receive a password reset link. The link will be valid for <?php echo isset($PASSWORD_RESET_TOKEN_EXPIRY_MINUTES) ? $PASSWORD_RESET_TOKEN_EXPIRY_MINUTES : 60; ?> minutes.</li>
+     <li class="list-group-item">Saisissez votre nom d'utilisateur ci-dessous pour recevoir un lien de réinitialisation de mot de passe. Ce lien sera valable pendant <?php echo isset($PASSWORD_RESET_TOKEN_EXPIRY_MINUTES) ? $PASSWORD_RESET_TOKEN_EXPIRY_MINUTES : 60; ?> minutes.</li>
     </ul>
 
     <div class="card-body text-center">
@@ -188,20 +188,20 @@ if ($request_sent) {  ?>
       <input type='hidden' name="request_reset" value="1">
 
       <div class="row mb-3">
-       <label for="username" class="col-sm-3 col-form-label text-end">Username</label>
+       <label for="username" class="col-sm-3 col-form-label text-end">Nom d'utilisateur</label>
        <div class="col-sm-6">
         <input type="text" class="form-control" id="username" name="username" value="<?php echo htmlspecialchars($username_input); ?>" required autocomplete="username">
        </div>
       </div>
 
       <div class="text-center mb-3">
-        <button type="submit" class="btn btn-secondary">Send reset link</button>
+        <button type="submit" class="btn btn-secondary">Envoyer le lien de réinitialisation</button>
       </div>
 
      </form>
 
      <div class="text-center mt-3">
-       <a href="<?php echo url('/log_in'); ?>">Back to login</a>
+       <a href="<?php echo url('/log_in'); ?>">Retour à la page de connexion</a>
      </div>
 
     </div>
