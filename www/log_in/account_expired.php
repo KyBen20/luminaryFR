@@ -57,37 +57,37 @@ render_header("$ORGANISATION_NAME account manager - Account expired");
         <div class="card-body">
 
           <div class="alert alert-danger">
-            <h5><strong>Your account has expired and can no longer be used.</strong></h5>
+            <h5><strong>Votre compte a expiré et ne peut plus être utilisé.</strong></h5>
           </div>
 
           <?php if ($expiry_date_formatted): ?>
           <div class="mb-3">
-            <p><strong>Expiration Date:</strong> <?php echo htmlspecialchars($expiry_date_formatted); ?></p>
+            <p><strong>Date d'expiration:</strong> <?php echo htmlspecialchars($expiry_date_formatted); ?></p>
             <?php if ($days_expired !== null): ?>
-            <p><strong>Expired:</strong> <?php echo $days_expired; ?> day<?php echo $days_expired != 1 ? 's' : ''; ?> ago</p>
+            <p><strong>Expiré:</strong> <?php echo $days_expired; ?> jours<?php echo $days_expired != 1 ? 's' : ''; ?> il y a</p>
             <?php endif; ?>
           </div>
           <?php endif; ?>
 
           <div class="mb-3">
-            <h5>What does this mean?</h5>
-            <p>Your account has reached its expiration date and has been disabled. You will not be able to access any services or resources until your account is renewed by an administrator.</p>
+            <h5>Qu'est-ce que cela signifie?h5>
+            <p>Votre compte a expiré et a été désactivé. Vous ne pourrez accéder à aucun service ni ressource tant qu'un administrateur ne l'aura pas renouvelé.</p>
           </div>
 
           <div class="mb-3">
-            <h5>What should you do?</h5>
-            <p>Please contact your system administrator to request an account renewal or extension. Provide them with your username: <strong><?php echo htmlspecialchars($USER_ID); ?></strong></p>
+            <h5>Que devez-vous faire ?</h5>
+            <p>Veuillez contacter votre administrateur système pour demander le renouvellement ou la prolongation de votre compte. Indiquez-lui votre nom d'utilisateur : <strong><?php echo htmlspecialchars($USER_ID); ?></strong></p>
           </div>
 
           <?php if (!empty($SUPPORT_EMAIL)): ?>
           <div class="alert alert-info">
-            <p class="mb-0"><strong>Support Contact:</strong> <a href="mailto:<?php echo htmlspecialchars($SUPPORT_EMAIL); ?>"><?php echo htmlspecialchars($SUPPORT_EMAIL); ?></a></p>
+            <p class="mb-0"><strong>Contact support:</strong> <a href="mailto:<?php echo htmlspecialchars($SUPPORT_EMAIL); ?>"><?php echo htmlspecialchars($SUPPORT_EMAIL); ?></a></p>
           </div>
           <?php endif; ?>
 
           <div class="text-center mt-4">
             <a href="<?php echo url('/log_out'); ?>" class="btn btn-secondary">
-              <i class="bi bi-box-arrow-right"></i> Log Out
+              <i class="bi bi-box-arrow-right"></i> Déconnexion
             </a>
           </div>
 
