@@ -15,8 +15,8 @@ if (isset($_GET['logged_out'])) {
 ?>
 <div class="container">
  <div class="alert alert-warning">
-  <p class="text-center">You've been automatically logged out because you've been inactive for over
-  <?php print $SESSION_TIMEOUT; ?> minutes. Click on the 'Log in' link to get back into the system.</p>
+  <p class="text-center">Vous avez été automatiquement déconnecté(e) car vous êtes resté(e) inactif(ve) pendant plus de
+  <?php print $SESSION_TIMEOUT; ?> minutes. Cliquez sur le lien « Se connecter » pour accéder à nouveau au système.</p>
  </div>
 </div>
 <?php
@@ -271,13 +271,13 @@ else {
 
    <?php if (isset($display_logged_out)) { ?>
    <div class="alert alert-warning">
-    You were logged out because your session expired. Log in again to continue.
+    Vous avez été déconnecté car votre session a expiré. Veuillez vous reconnecter pour continuer.
    </div>
    <?php } ?>
 
    <?php if (isset($_GET["invalid"])) { ?>
    <div class="alert alert-warning">
-    The username and/or password are unrecognised.
+    Le nom d'utilisateur et/ou le mot de passe sont inconnus.
    </div>
    <?php } ?>
 
@@ -292,7 +292,7 @@ else {
     </div>
 
     <div class="row mb-3">
-     <label for="password" class="col-sm-4 col-form-label text-end">Password</label>
+     <label for="password" class="col-sm-4 col-form-label text-end">Mot de passe</label>
      <div class="col-sm-6">
       <input type="password" class="form-control" id="confirm" name="password">
      </div>
@@ -300,12 +300,12 @@ else {
 
     <?php if ($PASSWORD_RESET_ENABLED == TRUE && $EMAIL_SENDING_ENABLED == TRUE) { ?>
     <div class="text-center mb-3">
-      <a href="<?php echo url('/password_reset/request.php'); ?>">Forgot password?</a>
+      <a href="<?php echo url('/password_reset/request.php'); ?>">Mot de passe oublié ?</a>
     </div>
     <?php } ?>
 
     <div class="text-center mb-3">
-     <button type="submit" class="btn btn-secondary">Log in</button>
+     <button type="submit" class="btn btn-secondary">Se connecter</button>
     </div>
 
    </form>
