@@ -79,10 +79,10 @@ if (isset($_POST['validate_first_code'])) {
 // Handle final enrolment form submission
 if (isset($_POST['enrol_mfa'])) {
   if ($schema_error) {
-    $error_message = "Multi-factor authentication is currently unavailable due to a configuration issue. Please contact your administrator.";
+    $error_message = "L'authentification multifacteurs est actuellement indisponible en raison d'un problème de configuration. Veuillez contacter votre administrateur.";
   }
   elseif (!isset($_POST['code1']) || !isset($_POST['code2']) || !isset($_POST['time_window1'])) {
-    $error_message = "Please complete both verification steps.";
+    $error_message = "Veuillez compléter les deux étapes de vérification.";
   }
   else {
     $secret = $_POST['secret'];
@@ -93,11 +93,11 @@ if (isset($_POST['enrol_mfa'])) {
 
     // Verify codes are from different time windows
     if ($time_window1 == $time_window2) {
-      $error_message = "Second code must be from a different time window. Please wait for the code to change.";
+      $error_message = "Le deuxième code doit provenir d'une plage horaire différente. Veuillez patienter jusqu'à ce que le code change.";
     }
     // Validate second code
     elseif (!totp_validate_code($secret, $code2, 1)) {
-      $error_message = "Second verification code is invalid.";
+      $error_message = "Le deuxième code de vérification est invalide.";
     }
     else {
       // Generate backup codes
@@ -111,7 +111,7 @@ if (isset($_POST['enrol_mfa'])) {
         $totp_status = 'active';
       }
       else {
-        $error_message = "Failed to save MFA configuration to LDAP.";
+        $error_message = "Échec de l'enregistrement de la configuration MFA dans LDAP.";
       }
     }
   }
@@ -120,7 +120,7 @@ if (isset($_POST['enrol_mfa'])) {
 // Handle disable MFA
 if (isset($_POST['disable_mfa'])) {
   if ($schema_error) {
-    $error_message = "Multi-factor authentication is currently unavailable due to a configuration issue. Please contact your administrator.";
+    $error_message = "L'authentification multifacteurs est actuellement indisponible en raison d'un problème de configuration. Veuillez contacter votre administrateur.";
   }
   elseif (totp_disable($ldap_connection, $user_dn)) {
     // Audit log MFA disabled
@@ -129,7 +129,7 @@ if (isset($_POST['disable_mfa'])) {
     $totp_status = 'disabled';
   }
   else {
-    $error_message = "Failed to disable MFA.";
+    $error_message = "Échec de la désactivation de l'authentification multifacteur.";
   }
 }
 
